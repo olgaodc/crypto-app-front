@@ -1,5 +1,6 @@
 import logoImage from '../../assets/logo-image.png';
 import { Container } from '../container';
+import { PrimaryButton } from '../primary-button';
 import * as S from './header.styled';
 
 const Header = () => {
@@ -14,7 +15,7 @@ const Header = () => {
           
           <S.Navbar>
             <S.NavbarItem>
-              <S.Link href='/'>Try It</S.Link>
+              <PrimaryButton onClick={() => console.log('clicked')} />
             </S.NavbarItem>
           </S.Navbar>
         </S.Header>

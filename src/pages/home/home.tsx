@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import * as ccxt from 'ccxt';
 import { Container } from '../../components/container';
+import { HeroBox } from '../../components/hero-box';
 
 
 
@@ -20,7 +21,7 @@ const HomePage = () => {
       }, []);
   return (
     <Container>
-        <div>HomePage</div>
+        <HeroBox/>
     </Container>
   )
 }
