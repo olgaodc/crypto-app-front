@@ -1,6 +1,6 @@
 import logoImage from '../../assets/logo-image.png';
 import { Container } from '../container';
-import { PrimaryButton } from '../primary-button';
+// import { PrimaryButton } from '../primary-button';
 import * as S from './header.styled';
 
 const Header = () => {
@@ -13,11 +13,11 @@ const Header = () => {
             <S.LogoText>CryptoSnap</S.LogoText>
           </S.LogoWrapper>
           
-          <S.Navbar>
+          {/* <S.Navbar>
             <S.NavbarItem>
               <PrimaryButton onClick={() => console.log('clicked')} />
             </S.NavbarItem>
-          </S.Navbar>
+          </S.Navbar> */}
         </S.Header>
       </Container>
     </div>

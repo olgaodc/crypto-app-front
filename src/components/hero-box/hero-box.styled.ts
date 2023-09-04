@@ -41,6 +41,6 @@ export const DescriptionWrapper = styled.div`
 
 export const Description = styled.p`
     margin: 0;
-    line-height: 140%;
+    line-height: 145%;
     max-width: 480px;
 `;

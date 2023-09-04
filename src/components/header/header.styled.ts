@@ -26,11 +26,11 @@ export const LogoText = styled.span`
     color: #8bbce9;
 `;
 
-export const Navbar = styled.ul`
-    margin: 0;
-    padding: 0;
-`;
+// export const Navbar = styled.ul`
+//     margin: 0;
+//     padding: 0;
+// `;
 
-export const NavbarItem = styled.li`
-    list-style-type: none;
-`;
+// export const NavbarItem = styled.li`
+//     list-style-type: none;
+// `;
