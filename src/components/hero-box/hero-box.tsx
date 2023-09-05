@@ -2,6 +2,7 @@ import { Container } from "../container";
 import * as S from "./hero-box.styled";
 import cryptoImage from '../../assets/crypto-image.png';
 import { PrimaryButton } from "../primary-button";
+import { CryptoForm } from "../form";
 
 
 const HeroBox = () => {
@@ -18,6 +19,7 @@ const HeroBox = () => {
             </S.DescriptionWrapper>
           </S.Info>
         </S.HeroBox>
+        <CryptoForm/>
       </Container>
     </S.HeroBoxWrapper>
   )
