@@ -12,43 +12,18 @@ export const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 0;
-    margin-bottom: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 
     @media (width <= 892px) {
         width: 100%;
     }
 
-    div.ant-form-item {
+    div.ant-form-item, div.ant-picker.ant-picker-range {
         width: 100%;
-        
+    }
 
-        div.ant-form-item-control-input-content {
-            .ant-select {
-                .ant-select-selector {
-                    border: 1px solid #2b2c2f !important;
-                    background-color: #2b2c2f;
-                    box-shadow: none !important;
-
-                    &:hover, &:focus-within {
-                        border: 1px solid #1cb073 !important;
-                    }
-                }
-                
-            }
-        }
-
-        input#crypto.ant-select-selection-search-input, span.ant-select-selection-item {
-            background-color: #2b2c2f;
-            color: #d0d8e7;
-        }
-
-        .ant-select-arrow {
-            color: #1cb073;
-        }
-
-        .ant-form-item-required {
-            color: #d0d8e7;
-        }
+    button {
+        margin-top: 10px;
     }
 `;

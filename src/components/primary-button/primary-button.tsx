@@ -2,8 +2,9 @@ import React from 'react';
 import * as S from './primary-button-styled';
 
 interface Props {
+  htmlType?: string;
   children?: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const PrimaryButton: React.FC<Props>  = ({

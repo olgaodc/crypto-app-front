@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const HeroBoxWrapper = styled.div`
+export const ContentWrapper = styled.div`
     min-height: calc(100vh - 192px);
 `;
 
-export const HeroBox = styled.div`
+export const Content = styled.div`
     width: 100%;
-    margin: 60px 0 40px;
+    margin: 60px 0;
 `;
 
 export const Title = styled.h1`

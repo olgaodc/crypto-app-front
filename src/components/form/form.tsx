@@ -1,70 +1,62 @@
-import React, { useState } from 'react';
-import { AutoComplete, Form, Select } from 'antd';
+import { useState } from 'react';
+import { AutoComplete, Form, DatePicker } from 'antd';
 import * as S from './form.styled';
-import { Container } from '../container';
-import { v4 as uuidv4 } from 'uuid';
 import { PrimaryButton } from '../primary-button';
 import { debounce } from "debounce";
-import ccxt from 'ccxt';
+// import CryptoChart from '../chart/chart';
+import moment from 'moment';
+import axios from 'axios';
 
-const intervalOptions: { [key: string]: string } = {
-  day1: '1 day',
-  day3: '3 days',
-  day5: '5 days',
-  week1: '1 week',
-  month1: '1 month',
-};
+const { RangePicker } = DatePicker;
 
 
 const CryptoForm = () => {
   const [form] = Form.useForm();
-  const [options, setOptions] = useState<string[]>([]);
-  const ccxtExchange = new ccxt.binance();
+  const [options, setOptions] = useState<{ name: string; id: string }[]>([]);
 
   const handleSearch = async (value: string) => {
     try {
-      // Use cctx library to fetch cryptocurrency suggestions
-      const markets = await ccxtExchange.loadMarkets();
-      const symbols = Object.keys(markets);
-      const suggestions = symbols.filter((symbol) =>
-        symbol.toLowerCase().includes(value.toLowerCase())
-      );
-
+      const response = await axios.get('https://api.coincap.io/v2/assets');
+      const cryptoList = response.data.data;
+      const suggestions = cryptoList.filter((crypto: any) => crypto.name.toLowerCase().includes(value.toLowerCase()));
       setOptions(suggestions);
+      // console.log(suggestions);
     } catch (error) {
       console.error('Error fetching cryptocurrency suggestions', error);
     }
   };
 
-  // Debounce the handleSearch function
-  const debouncedHandleSearch = debounce(handleSearch, 800);
+  const debouncedHandleSearch = debounce(handleSearch, 500);
 
-  const handleSubmit = (values: any) => {
-    // Handle form submission here
-    console.log('Form values:', values);
+  const handleSubmit = async () => {
+    try {
+      const selectedCryptoName = form.getFieldValue('crypto');
+      const selectedCrypto = options.find((crypto) => crypto.name === selectedCryptoName);
+      const id = selectedCrypto?.id;
+      // console.log('Selected Crypto ID:', id);
+
+      const selectedDateRange = form.getFieldValue('interval');
+
+      const [startDate, endDate] = selectedDateRange;
+
+      const startUnixTimestamp = startDate.valueOf();
+      const endUnixTimestamp = endDate.valueOf();
+
+      const response = await axios.get(`https://api.coincap.io/v2/assets/${id}/history?interval=h1`, {
+        params: {
+          start: startUnixTimestamp,
+          end: endUnixTimestamp,
+        },
+      });
+
+      const historicalData = response;
+
+      console.log('Historical data:', historicalData);
+
+    } catch (error) {
+      console.error('Error fetching cryptocurrency data', error);
+    }
   };
-
-  // const handleSubmit = async (
-  //     createActivityForm: Backend.CreateActivitiesForm,
-  //   ) => {
-  //     const payload: Backend.CreateActivitiesForm = {
-  //       category: createActivityForm.category,
-  //       title: createActivityForm.title,
-  //       eventDate: createActivityForm.eventDate,
-  //       text: createActivityForm.text,
-  //       url: createActivityForm.url,
-  //       address: createActivityForm.address,
-  //     };
-
-  //     await addActivity(payload, newsletter.id);
-  //     navigate(NavigationService.ACTIVITIES_PATH);
-  //   };
-
-  //   const handleSearch = async (value: string) => {
-  //       const suggestions = await getAddressSuggestions(value);
-
-  //       setOptions(suggestions);
-  //   };
 
   return (
     <S.FormWrapper>
@@ -73,7 +65,6 @@ const CryptoForm = () => {
         form={form}
         autoComplete="off"
         layout="vertical"
-        // initialValues={FORM_INITIAL_VALUES}
       >
         <Form.Item
           label="Cryptocurrency"
@@ -83,49 +74,48 @@ const CryptoForm = () => {
               required: true,
               message: 'Please select cryptocurrency',
               validateTrigger: 'onSubmit',
-            },
+            }
           ]}
           trigger="onSelect"
           valuePropName=""
         >
           <AutoComplete
-            placeholder="e.g. BTC/USDT"
+            maxLength={30}
+            placeholder="e.g. Bitcoin"
             notFoundContent="No cryptocurrency"
-            options={options.map((option) => ({
-              value: option,
-              label: option,
-              key: uuidv4(),
+            options={options.map((crypto: any) => ({
+              value: crypto.name,
+              label: crypto.name,
+              key: crypto.id
             }))}
             onSearch={debouncedHandleSearch}
           />
         </Form.Item>
         <Form.Item
-          label="Time interval"
+          label="Date range"
           name="interval"
           rules={[
             {
               required: true,
-              message: 'Please fill this field',
-            },
+              message: 'Please choose date range',
+            }
           ]}
         >
-          <Select>
-            {Object.keys(intervalOptions).map((key) => (
-              <Select.Option key={key} value={key}>
-                {intervalOptions[key]}
-              </Select.Option>
-            ))}
-          </Select>
+          <RangePicker
+            disabledDate={(current) => {
+              return current && current > moment().endOf('day');
+            }}
+          />
         </Form.Item>
         <PrimaryButton
-          // type="primary"
-          // htmlType="submit"
+          htmlType="submit"
           // loading={loading}
           onClick={form.submit}
         >
           Search
         </PrimaryButton>
       </S.StyledForm>
+      {/* {isClicked && <CryptoChart cryptoData={cryptoData} timestamps={stringTimestamps} />} */}
     </S.FormWrapper>
   )
 }

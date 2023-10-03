@@ -25,12 +25,3 @@ export const LogoText = styled.span`
     font-size: 18px;
     color: #8bbce9;
 `;
-
-// export const Navbar = styled.ul`
-//     margin: 0;
-//     padding: 0;
-// `;
-
-// export const NavbarItem = styled.li`
-//     list-style-type: none;
-// `;

@@ -5,16 +5,3 @@ body {
   background-color: #061121;
   color: #d0d8e7;
 }
-
-.ant-select-dropdown {
-  background-color: #2b2c2f;
-  color: #d0d8e7;
-}
-.ant-select-item.ant-select-item-option {
-  color: #d0d8e7;
-}
-
-.ant-select-item.ant-select-item-option.ant-select-item-option-selected {
-  background-color: #292A2D;
-  color: #d0d8e7;
-}
