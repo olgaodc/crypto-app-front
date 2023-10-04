@@ -1,51 +1,108 @@
-import React, { useRef, useEffect } from 'react';
-import Chart from 'chart.js/auto';
+import { Chart as ChartJS, LineElement } from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
 
-const CryptoChart = ({ cryptoData, timestamps } : { cryptoData: number[], timestamps: string[] }) => {
-    const chartRef = useRef<HTMLCanvasElement | null>(null);
+ChartJS.register(
+  LineElement,
+  // PointElement,
+)
 
-  useEffect(() => {
-    if (chartRef.current) {
-      const ctx = chartRef.current?.getContext('2d');
+const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: string[] }) => {
 
-      if (ctx) {
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: timestamps,
-              datasets: [
-                {
-                  label: 'Price',
-                  data: cryptoData,
-                  borderColor: 'rgb(75, 192, 192)',
-                  borderWidth: 2,
-                },
-              ],
-            },
-            options: {
-              scales: {
-                x: {
-                  type: 'time',
-                  time: {
-                    unit: 'minute',
-                  },
-                },
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            },
-          });
+  const data = {
+    labels: time,
+    datasets: [{
+      label: '',
+      data: cryptoPrice,
+      borderWidth: 1,
+      borderColor: '#1cb073',
+      backgroundColor: 'rgba(28, 176, 115, 0.2)',
+      // pointBorderColor: 'transparent', 
+      pointStyle: false as false,
+      fill: true,     
+      // pointStyle: false
+    }]
+  }
+
+  const options = {
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: false,
+        grid: {
+          display: false
+        },
+        ticks: {
+          callback: (value: any) => {
+            if (value < 0.1) {
+              return '$' + value.toFixed(8);
+            } else {
+              return '$' + value.toFixed(2);
+            }
+          },
+          color: '#ffffffd9',
+          font: {
+            size: 14
+          },
+        }
+      },
+      x: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          autoSkip: true,
+          autoSkipPadding: 30,
+          maxRotation: 0,
+          // maxTicksLimit: 8,
+          color: '#ffffffd9',
+          font: {
+            size: 14
+          },
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 0,
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context: any) {
+            let value = context.parsed.y;
+            if (value < 1) {
+              value = value.toFixed(8);
+            } else {
+              value = value.toFixed(2);
+            }
+            return "$" + value;
+          },
+        },
+        displayColors: false,
+        backgroundColor: '#2b2c2f',
+        padding: 10,
+        titleColor: '#fca311',
+        bodyColor: '#fca311',
+        titleFont: {
+          size: 14
+        },
+        bodyFont: {
+          size: 14
+        }
       }
     }
-  }, [cryptoData, timestamps]);
+  }
 
   return (
     <div>
-      <h2>Cryptocurrency chart</h2>
-      <canvas ref={chartRef} />
+      <Line
+        height={400}
+        data={data}
+        options={options}
+      />
     </div>
-  );
-};
+  )
+}
 
-export default CryptoChart;
+export default CryptoChart
