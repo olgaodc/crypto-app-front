@@ -18,6 +18,10 @@ export const ChartWrapper = styled.div`
         @media (width <= 892px) {
             width: 100%;
         }
+
+        @media (width <= 576px) {
+            padding: 15px;
+        }
     }
 
     .cryptoName {

@@ -95,7 +95,13 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
           size: 14
         }
       }
-    }
+    },
+    onResize: function (chart: any, size: any) {
+      const showTicks = size.width >= 490;
+      chart.options.scales.x.ticks.display = showTicks;
+      chart.options.scales.y.ticks.display = showTicks;
+      chart.update();
+    },
   }
 
   return (
