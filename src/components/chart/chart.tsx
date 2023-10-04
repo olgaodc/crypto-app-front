@@ -7,7 +7,7 @@ ChartJS.register(
   // PointElement,
 )
 
-const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: string[] }) => {
+const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPrice: number[], time: string[], cryptoName: string, cryptoSymbol: string }) => {
 
   const data = {
     labels: time,
@@ -15,12 +15,12 @@ const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: strin
       label: '',
       data: cryptoPrice,
       borderWidth: 1,
-      borderColor: '#1cb073',
-      backgroundColor: 'rgba(28, 176, 115, 0.2)',
+      // borderColor: '#1cb073',
+      borderColor: '#AD7ED6',
+      backgroundColor: '#ad7ed620',
       // pointBorderColor: 'transparent', 
       pointStyle: false as false,
       fill: true,     
-      // pointStyle: false
     }]
   }
 
@@ -44,6 +44,9 @@ const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: strin
           font: {
             size: 14
           },
+          maxTicksLimit: 8,
+          autoSkip: true,
+          autoSkipPadding: 20,
         }
       },
       x: {
@@ -81,10 +84,10 @@ const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: strin
           },
         },
         displayColors: false,
-        backgroundColor: '#2b2c2f',
+        backgroundColor: '#17072bd4',
         padding: 10,
-        titleColor: '#fca311',
-        bodyColor: '#fca311',
+        titleColor: '#ffffffd9',
+        bodyColor: '#ffffffd9',
         titleFont: {
           size: 14
         },
@@ -98,6 +101,7 @@ const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: strin
   return (
     <ChartWrapper>
       <div>
+      <h1 className='cryptoName'>{cryptoName} ({cryptoSymbol})</h1>
         <Line
           height={400}
           data={data}

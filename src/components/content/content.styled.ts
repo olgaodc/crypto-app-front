@@ -9,26 +9,18 @@ export const Content = styled.div`
     margin: 60px 0;
 `;
 
-export const Title = styled.h1`
-    margin: 0;
-    font-size: 44px;
-    font-weight: 600;
-    text-align: center;
-    color: #fca311;
-`;
-
 export const Info = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 50px;
     margin-top: 30px;
 `;
 
 export const Image = styled.img`
-    max-width: 360px;
-    /* height: 100%;
-    object-fit: contain; */
+    max-width: 420px;
+    /* width: 35%; */
     display: block;
 `;
 
@@ -36,7 +28,17 @@ export const DescriptionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
-    align-items: center;
+    max-width: 500px;
+    /* align-items: center; */
+`;
+
+export const Title = styled.h1`
+    margin: 0;
+    font-size: 66px;
+    font-weight: 400;
+    /* text-align: center; */
+    color: #fca311;
+    font-family: 'Noto Sans NKo Unjoined', sans-serif;
 `;
 
 export const Description = styled.p`

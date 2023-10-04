@@ -15,9 +15,11 @@ function App() {
           token: {
             colorPrimary: '#1cb073',
             borderRadius: 6,
+            colorBgElevated: '#1B1C2F',
+            controlItemBgActive: '#1B1C2F',
 
-            colorBgContainer: '#2b2c2f',
-            colorBorder: '#2b2c2f',
+            colorBgContainer: '#1B1C2F',
+            colorBorder: '#1B1C2F',
           },
         }}
       >

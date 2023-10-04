@@ -30,6 +30,11 @@ export const StyledForm = styled(Form)`
     }
 
     button {
-        margin-top: 10px;
+        margin: 10px 0;
+    }
+
+    .errorMessage {
+        color: #dc4446;
+        font-size: 16px;
     }
 `;

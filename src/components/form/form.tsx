@@ -3,12 +3,10 @@ import { AutoComplete, Form, Select } from 'antd';
 import * as S from './form.styled';
 import { PrimaryButton } from '../primary-button';
 import { debounce } from "debounce";
-import CryptoChart from '../chart/chart';
+import { CryptoChart } from '../chart';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
-
-// const { RangePicker } = DatePicker;
 
 const intervalOptions = [
   { label: '1 day', value: 'm1' },
@@ -22,21 +20,24 @@ const intervalOptions = [
 
 const CryptoForm = () => {
   const [form] = Form.useForm();
-  const [options, setOptions] = useState<{ name: string; id: string }[]>([]);
+  const [options, setOptions] = useState<{ name: string; id: string, symbol: string }[]>([]);
   const [selectedCryptoPrice, setSelectedCryptoPrice] = useState<number[]>([]);
   const [selectedCryptoTime, setSelectedCryptoTime] = useState<string[]>([]);
+  const [selectedCryptoSymbol, setSelectedCryptoSymbol] = useState<string | null>(null);
   const [isClicked, setClicked] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSearch = async (value: string) => {
     try {
       const response = await axios.get('https://api.coincap.io/v2/assets', {
         params: {
-          limit: 2000
+          limit: 1000
         },});
       const cryptoList = response.data.data;
       const suggestions = cryptoList.filter((crypto: any) => crypto.name.toLowerCase().includes(value.toLowerCase()));
       setOptions(suggestions);
       // console.log(suggestions);
+
     } catch (error) {
       console.error('Error fetching cryptocurrency suggestions', error);
     }
@@ -49,6 +50,13 @@ const CryptoForm = () => {
       const selectedCryptoName = form.getFieldValue('crypto');
       const selectedCrypto = options.find((crypto) => crypto.name === selectedCryptoName);
       const id = selectedCrypto?.id;
+      const symbol = selectedCrypto?.symbol;
+    
+      if (symbol) {
+        setSelectedCryptoSymbol(symbol);
+      }
+      // console.log(symbol);
+
       // console.log('Selected Crypto ID:', id);
 
       // const selectedDateRange = form.getFieldValue('interval');
@@ -106,8 +114,11 @@ const CryptoForm = () => {
 
       // console.log('Selected Crypto Data:', selectedCryptoData);
 
+      setError(null);
+
     } catch (error) {
       console.error('Error fetching cryptocurrency data', error);
+      setError('Something went wrong, please try again later');
     }
   };
 
@@ -145,22 +156,6 @@ const CryptoForm = () => {
               onSearch={debouncedHandleSearch}
             />
           </Form.Item>
-          {/* <Form.Item
-          label="Date range"
-          name="interval"
-          rules={[
-            {
-              required: true,
-              message: 'Please choose date range',
-            }
-          ]}
-        >
-          <RangePicker showTime
-            disabledDate={(current) => {
-              return current && current > moment().endOf('day');
-            }}
-          />
-        </Form.Item> */}
           <Form.Item
             label="Time interval"
             name="interval"
@@ -188,9 +183,16 @@ const CryptoForm = () => {
           >
             Search
           </PrimaryButton>
+          {error && <div className='errorMessage'>{error}</div>}
         </S.StyledForm>
       </S.FormWrapper>
-      {isClicked && <CryptoChart cryptoPrice={selectedCryptoPrice} time={selectedCryptoTime} />}
+      {isClicked && selectedCryptoPrice.length > 0 && 
+      <CryptoChart 
+        cryptoPrice={selectedCryptoPrice} 
+        time={selectedCryptoTime} 
+        cryptoName={form.getFieldValue('crypto')} 
+        cryptoSymbol={selectedCryptoSymbol || ''}
+      />}
     </>
   )
 }
