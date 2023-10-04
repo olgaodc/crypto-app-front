@@ -17,6 +17,10 @@ export const FormTitle = styled.div`
     text-align: center;
     word-break: break-word;
 
+    @media (width <= 547px) {
+        font-size: 40px;
+    }
+
     span {
         color: #1cb073;
     }
