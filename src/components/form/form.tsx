@@ -29,7 +29,10 @@ const CryptoForm = () => {
 
   const handleSearch = async (value: string) => {
     try {
-      const response = await axios.get('https://api.coincap.io/v2/assets');
+      const response = await axios.get('https://api.coincap.io/v2/assets', {
+        params: {
+          limit: 2000
+        },});
       const cryptoList = response.data.data;
       const suggestions = cryptoList.filter((crypto: any) => crypto.name.toLowerCase().includes(value.toLowerCase()));
       setOptions(suggestions);
