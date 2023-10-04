@@ -31,7 +31,7 @@ const CryptoForm = () => {
     try {
       const response = await axios.get('https://api.coincap.io/v2/assets', {
         params: {
-          limit: 1000
+          limit: 1200
         },});
       const cryptoList = response.data.data;
       const suggestions = cryptoList.filter((crypto: any) => crypto.name.toLowerCase().includes(value.toLowerCase()));
@@ -125,6 +125,7 @@ const CryptoForm = () => {
   return (
     <>
       <S.FormWrapper>
+      <S.FormTitle>Find over <span>1000</span> cryptocurrencies</S.FormTitle>
         <S.StyledForm
           onFinish={handleSubmit}
           form={form}

@@ -6,7 +6,11 @@ export const ContentWrapper = styled.div`
 
 export const Content = styled.div`
     width: 100%;
-    margin: 60px 0;
+    margin: 90px 0;
+
+    @media (width <= 748px) {
+        margin: 40px 0;
+    }
 `;
 
 export const Info = styled.div`
@@ -14,22 +18,36 @@ export const Info = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 50px;
-    margin-top: 30px;
+    gap: 30px;
+
+    @media (width <= 748px) {
+        gap: 15px;
+    }
 `;
 
 export const Image = styled.img`
-    max-width: 420px;
-    /* width: 35%; */
+    /* max-width: 420px; */
+    width: 40%;
     display: block;
+
+    @media (width <= 748px) {
+        width: 350px;
+    }
 `;
 
 export const DescriptionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
-    max-width: 500px;
+    /* max-width: 500px; */
+    width: 55%;
     /* align-items: center; */
+
+    @media (width <= 748px) {
+        width: unset;
+        max-width: 500px;
+        align-items: center;
+    }
 `;
 
 export const Title = styled.h1`
@@ -39,6 +57,20 @@ export const Title = styled.h1`
     /* text-align: center; */
     color: #fca311;
     font-family: 'Noto Sans NKo Unjoined', sans-serif;
+
+    @media (width <= 992px) {
+        font-size: 46px;
+    }
+
+    @media (width <= 748px) {
+        text-align: center;
+    }
+
+    @media (width <= 547px) {
+        word-break: break-word;
+    }
+
+    
 `;
 
 export const Description = styled.p`

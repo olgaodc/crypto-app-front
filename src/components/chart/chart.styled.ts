@@ -7,13 +7,9 @@ export const ChartWrapper = styled.div`
 
     div {
         background-color: #1B1C2F;
-        /* background-color: violet; */
         padding: 30px;
         border-radius: 20px;
-        /* z-index: 0; */
-        width: 80%;
-        /* position: relative; */
-        
+        width: 80%;        
 
         @media (width <= 892px) {
             width: 100%;
@@ -25,18 +21,23 @@ export const ChartWrapper = styled.div`
     }
 
     .cryptoName {
-        /* position: absolute;
-        top: 60px;
-        left: 130px; */
         font-size: 32px;
         font-weight: 500;
         color: #AD7ED6;
         text-align: center;
         margin: 0;
+
+        @media (width <= 576px) {
+            font-size: 22px;
+        }
     }
 
     canvas {
         max-height: 400px;
+
+        @media (width <= 576px) {
+            max-height: 350px;
+        }
     }
 
 `;

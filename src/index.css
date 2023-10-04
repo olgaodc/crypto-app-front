@@ -5,6 +5,7 @@ body {
   /* background-color: #061121; */
   background-color: #17072b;
   color: #d0d8e7;
+  min-width: 370px;
 }
 
 .ant-select-item-option.ant-select-item-option-active.ant-select-item-option-selected {

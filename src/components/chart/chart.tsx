@@ -18,7 +18,6 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
       // borderColor: '#1cb073',
       borderColor: '#AD7ED6',
       backgroundColor: '#ad7ed620',
-      // pointBorderColor: 'transparent', 
       pointStyle: false as false,
       fill: true,     
     }]
@@ -30,6 +29,9 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
       y: {
         beginAtZero: false,
         grid: {
+          display: false
+        },
+        border: {
           display: false
         },
         ticks: {
@@ -44,12 +46,15 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
           font: {
             size: 14
           },
-          maxTicksLimit: 8,
+          maxTicksLimit: 7,
           autoSkip: true,
           autoSkipPadding: 20,
         }
       },
       x: {
+        border: {
+          display: false
+        },
         grid: {
           display: false
         },
@@ -94,12 +99,12 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
         bodyFont: {
           size: 14
         }
-      }
+      },
     },
     onResize: function (chart: any, size: any) {
       const showTicks = size.width >= 490;
       chart.options.scales.x.ticks.display = showTicks;
-      chart.options.scales.y.ticks.display = showTicks;
+      chart.options.scales.y.ticks.mirror = !showTicks;
       chart.update();
     },
   }
@@ -107,7 +112,7 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
   return (
     <ChartWrapper>
       <div>
-      <h1 className='cryptoName'>{cryptoName} ({cryptoSymbol})</h1>
+      <h3 className='cryptoName'>{cryptoName} ({cryptoSymbol})</h3>
         <Line
           height={400}
           data={data}
