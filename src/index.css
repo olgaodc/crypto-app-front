@@ -5,3 +5,8 @@ body {
   background-color: #061121;
   color: #d0d8e7;
 }
+
+.ant-select-item-option.ant-select-item-option-active.ant-select-item-option-selected {
+  background-color: #292A2D;
+}
+

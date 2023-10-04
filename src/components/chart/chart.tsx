@@ -1,5 +1,6 @@
 import { Chart as ChartJS, LineElement } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
+import { ChartWrapper } from './chart.styled';
 
 ChartJS.register(
   LineElement,
@@ -95,13 +96,15 @@ const CryptoChart = ({ cryptoPrice, time }: { cryptoPrice: number[], time: strin
   }
 
   return (
-    <div>
-      <Line
-        height={400}
-        data={data}
-        options={options}
-      />
-    </div>
+    <ChartWrapper>
+      <div>
+        <Line
+          height={400}
+          data={data}
+          options={options}
+        />
+      </div>
+    </ChartWrapper>
   )
 }
 
