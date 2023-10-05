@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AutoComplete, Form, Select } from 'antd';
+import { AutoComplete, Empty, Form, Select, Spin } from 'antd';
 import * as S from './form.styled';
 import { PrimaryButton } from '../primary-button';
 import { debounce } from "debounce";
@@ -26,13 +26,16 @@ const CryptoForm = () => {
   const [selectedCryptoSymbol, setSelectedCryptoSymbol] = useState<string | null>(null);
   const [isClicked, setClicked] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasNoData, setHasNoData] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSearch = async (value: string) => {
     try {
       const response = await axios.get('https://api.coincap.io/v2/assets', {
         params: {
           limit: 1200
-        },});
+        },
+      });
       const cryptoList = response.data.data;
       const suggestions = cryptoList.filter((crypto: any) => crypto.name.toLowerCase().includes(value.toLowerCase()));
       setOptions(suggestions);
@@ -47,11 +50,14 @@ const CryptoForm = () => {
 
   const handleSubmit = async () => {
     try {
+      setError(null);
+      setLoading(true);
+
       const selectedCryptoName = form.getFieldValue('crypto');
       const selectedCrypto = options.find((crypto) => crypto.name === selectedCryptoName);
       const id = selectedCrypto?.id;
       const symbol = selectedCrypto?.symbol;
-    
+
       if (symbol) {
         setSelectedCryptoSymbol(symbol);
       }
@@ -79,7 +85,7 @@ const CryptoForm = () => {
         startDate = dayjs().subtract(1, 'year');
       } else if (selectedIntervalOption === '5 years') {
         startDate = dayjs().subtract(5, 'years');
-      } 
+      }
 
       // const [startDate, endDate] = selectedDateRange;
 
@@ -89,7 +95,7 @@ const CryptoForm = () => {
       const endUnixTimestamp = dayjs().valueOf();
       // console.log(startUnixTimestamp);
       // console.log(endUnixTimestamp);
-      
+
 
       const response = await axios.get(`https://api.coincap.io/v2/assets/${id}/history?interval=${selectedInterval}`, {
         params: {
@@ -114,18 +120,21 @@ const CryptoForm = () => {
 
       // console.log('Selected Crypto Data:', selectedCryptoData);
 
-      setError(null);
-
     } catch (error) {
       console.error('Error fetching cryptocurrency data', error);
       setError('Something went wrong, please try again later');
+    } finally {
+      if (selectedCryptoPrice.length == 0) {
+        setHasNoData(true);
+      };
+      setLoading(false);
     }
   };
 
   return (
     <>
       <S.FormWrapper>
-      <S.FormTitle>Find over <span>1000</span> cryptocurrencies</S.FormTitle>
+        <S.FormTitle>Find over <span>1000</span> cryptocurrencies</S.FormTitle>
         <S.StyledForm
           onFinish={handleSubmit}
           form={form}
@@ -167,7 +176,7 @@ const CryptoForm = () => {
               },
             ]}
           >
-            <Select 
+            <Select
             // placeholder="kkk"
             >
               {intervalOptions.map((option) => (
@@ -179,21 +188,41 @@ const CryptoForm = () => {
           </Form.Item>
           <PrimaryButton
             htmlType="submit"
-            // loading={loading}
+            loading={loading}
             onClick={() => { form.submit(); setClicked(true) }}
           >
             Search
-          </PrimaryButton>
-          {error && <div className='errorMessage'>{error}</div>}
+          </PrimaryButton >
+          {/* {error && <div className='errorMessage'>{error}</div>} */}
         </S.StyledForm>
       </S.FormWrapper>
-      {isClicked && selectedCryptoPrice.length > 0 && 
+      {/* {isClicked && selectedCryptoPrice.length > 0 && 
       <CryptoChart 
         cryptoPrice={selectedCryptoPrice} 
         time={selectedCryptoTime} 
         cryptoName={form.getFieldValue('crypto')} 
         cryptoSymbol={selectedCryptoSymbol || ''}
       />}
+      {hasNoData && selectedCryptoPrice.length === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />} */}
+      {/* {isClicked && selectedCryptoPrice.length === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />} */}
+
+      {isClicked && (
+        error ? (
+          <S.ErrorMessage>{error}</S.ErrorMessage>
+        ) : (
+          selectedCryptoPrice.length > 0 ? (
+            <CryptoChart
+              cryptoPrice={selectedCryptoPrice}
+              time={selectedCryptoTime}
+              cryptoName={form.getFieldValue('crypto')}
+              cryptoSymbol={selectedCryptoSymbol || ''}
+            />
+          ) : (hasNoData &&
+            <S.EmptyData image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          )
+        )
+      )}
+
     </>
   )
 }

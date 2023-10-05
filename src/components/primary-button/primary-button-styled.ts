@@ -6,7 +6,6 @@ export const PrimaryButton = styled(Button)`
     border: 0;
     box-shadow: none;
     font-family: 'Inter', sans-serif;
-    width: 80px;
     transition: 0.5s;
 
      &.ant-btn.ant-btn-primary:hover {

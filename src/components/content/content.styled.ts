@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const ContentWrapper = styled.div`
-    min-height: calc(100vh - 192px);
+    /* min-height: calc(100vh - 272px); */
+    margin-bottom: 50px;
 `;
 
 export const Content = styled.div`
@@ -31,7 +32,11 @@ export const Image = styled.img`
     display: block;
 
     @media (width <= 748px) {
-        width: 350px;
+        width: 380px;
+    }
+
+    @media (width <= 547px) {
+        width: 300px;
     }
 `;
 
@@ -57,6 +62,7 @@ export const Title = styled.h1`
     /* text-align: center; */
     color: #fca311;
     font-family: 'Noto Sans NKo Unjoined', sans-serif;
+    max-width: 600px;
 
     @media (width <= 992px) {
         font-size: 46px;

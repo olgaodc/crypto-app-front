@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form } from 'antd';
+import { Empty, Form } from 'antd';
 
 export const FormWrapper = styled.div`
     width: 100%;
@@ -46,6 +46,10 @@ export const StyledForm = styled(Form)`
         width: 100%;
     }
 
+    input, .ant-select-selection-item {
+        font-size: 14px;
+    }
+
     .ant-select-arrow {
         color: #1cb073;
     }
@@ -53,9 +57,23 @@ export const StyledForm = styled(Form)`
     button {
         margin: 10px 0;
     }
+`;
 
-    .errorMessage {
-        color: #dc4446;
-        font-size: 16px;
+export const ErrorMessage = styled.div`
+    color: #dc4446;
+    font-size: 16px;
+    text-align: center;
+    margin-top: -30px;
+`;
+
+export const EmptyData = styled(Empty)`
+    font-size: 18px;
+    margin: 0;
+
+    div.ant-empty.ant-empty-normal {
+
+        div.ant-empty-image svg {
+            height: 100px;
+        }
     }
 `;

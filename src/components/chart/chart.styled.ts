@@ -36,7 +36,7 @@ export const ChartWrapper = styled.div`
         max-height: 400px;
 
         @media (width <= 576px) {
-            max-height: 350px;
+            max-height: 300px;
         }
     }
 

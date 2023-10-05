@@ -1,6 +1,7 @@
 import { Chart as ChartJS, LineElement } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import { ChartWrapper } from './chart.styled';
+import { useState } from 'react';
 
 ChartJS.register(
   LineElement,
@@ -35,6 +36,7 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
           display: false
         },
         ticks: {
+          mirror: false,
           callback: (value: any) => {
             if (value < 0.1) {
               return '$' + value.toFixed(8);
@@ -59,6 +61,7 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
           display: false
         },
         ticks: {
+          display: true,
           autoSkip: true,
           autoSkipPadding: 30,
           maxRotation: 0,
@@ -101,12 +104,14 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
         }
       },
     },
-    onResize: function (chart: any, size: any) {
-      const showTicks = size.width >= 490;
-      chart.options.scales.x.ticks.display = showTicks;
-      chart.options.scales.y.ticks.mirror = !showTicks;
-      chart.update();
-    },
+    // onResize: function (chart: any) {
+    //   const shouldShowTicks = window.innerWidth <= 547;
+    //   if (shouldShowTicks) {
+    //     chart.options.scales.x.ticks.display = false;
+    //     chart.options.scales.y.ticks.mirror = true;
+    //     chart.update();
+    //   }      
+    // },
   }
 
   return (
