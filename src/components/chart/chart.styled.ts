@@ -8,7 +8,7 @@ export const ChartWrapper = styled.div`
     div {
         background-color: #1B1C2F;
         padding: 30px;
-        border-radius: 20px;
+        border-radius: 8px;
         width: 80%;        
 
         @media (width <= 892px) {
@@ -28,7 +28,7 @@ export const ChartWrapper = styled.div`
         margin: 0;
 
         @media (width <= 576px) {
-            font-size: 22px;
+            font-size: 20px;
         }
     }
 

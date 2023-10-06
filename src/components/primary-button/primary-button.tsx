@@ -5,6 +5,7 @@ interface Props {
   htmlType?: string;
   children?: React.ReactNode;
   loading?: boolean;
+  size?: string;
   onClick?: () => void;
 }
 
@@ -14,7 +15,7 @@ const PrimaryButton: React.FC<Props>  = ({
   loading,
 }) => {
   return (
-    <S.PrimaryButton type="primary" onClick={onClick} loading={loading}>{children || 'Try It'}</S.PrimaryButton>
+    <S.PrimaryButton type="primary" onClick={onClick} loading={loading}>{children}</S.PrimaryButton>
   )
 }
 

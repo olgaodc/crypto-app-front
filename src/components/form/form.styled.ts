@@ -46,8 +46,14 @@ export const StyledForm = styled(Form)`
         width: 100%;
     }
 
+    label.ant-form-item-required {
+        font-size: 18px;
+        font-family: 'Inter', sans-serif;
+    }
+
     input, .ant-select-selection-item {
-        font-size: 14px;
+        font-size: 16px;
+        font-family: 'Inter', sans-serif;
     }
 
     .ant-select-arrow {

@@ -154,10 +154,12 @@ const CryptoForm = () => {
             trigger="onSelect"
             valuePropName=""
           >
-            <AutoComplete
+            <AutoComplete 
+              autoFocus={false} 
+              size='large'
               maxLength={30}
-              placeholder="e.g. Bitcoin"
-              notFoundContent="No cryptocurrency"
+              placeholder='e.g. Bitcoin'
+              notFoundContent='No cryptocurrency'
               options={options.map((crypto: any) => ({
                 value: crypto.name,
                 label: crypto.name,
@@ -176,7 +178,9 @@ const CryptoForm = () => {
               },
             ]}
           >
-            <Select
+            <Select 
+            autoFocus={false}
+            size='large'
             // placeholder="kkk"
             >
               {intervalOptions.map((option) => (
@@ -187,7 +191,7 @@ const CryptoForm = () => {
             </Select>
           </Form.Item>
           <PrimaryButton
-            htmlType="submit"
+            htmlType='submit'
             loading={loading}
             onClick={() => { form.submit(); setClicked(true) }}
           >

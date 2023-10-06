@@ -63,7 +63,7 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
         ticks: {
           display: true,
           autoSkip: true,
-          autoSkipPadding: 30,
+          autoSkipPadding: 40,
           maxRotation: 0,
           // maxTicksLimit: 8,
           color: '#ffffffd9',

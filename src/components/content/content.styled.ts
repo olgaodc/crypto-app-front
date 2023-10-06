@@ -65,7 +65,7 @@ export const Title = styled.h1`
     max-width: 600px;
 
     @media (width <= 992px) {
-        font-size: 46px;
+        font-size: 52px;
     }
 
     @media (width <= 748px) {
@@ -74,13 +74,13 @@ export const Title = styled.h1`
 
     @media (width <= 547px) {
         word-break: break-word;
+        font-size: 44px;
     }
-
-    
 `;
 
 export const Description = styled.p`
     margin: 0;
     line-height: 145%;
-    max-width: 480px;
+    font-size: 18px;
+    max-width: 600px;
 `;
