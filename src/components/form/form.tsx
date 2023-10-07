@@ -124,10 +124,11 @@ const CryptoForm = () => {
       console.error('Error fetching cryptocurrency data', error);
       setError('Something went wrong, please try again later');
     } finally {
+      setLoading(false);
+
       if (selectedCryptoPrice.length == 0) {
         setHasNoData(true);
-      };
-      setLoading(false);
+      };      
     }
   };
 

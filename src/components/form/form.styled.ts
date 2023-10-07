@@ -74,12 +74,6 @@ export const ErrorMessage = styled.div`
 
 export const EmptyData = styled(Empty)`
     font-size: 18px;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-
-    div.ant-empty.ant-empty-normal {
-
-        div.ant-empty-image svg {
-            height: 100px;
-        }
-    }
 `;

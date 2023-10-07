@@ -38,7 +38,9 @@ const CryptoChart = ({ cryptoPrice, time, cryptoName, cryptoSymbol }: { cryptoPr
         ticks: {
           mirror: false,
           callback: (value: any) => {
-            if (value < 0.1) {
+            if (value === 0.00000000) {
+              return '$' + value.toFixed(0);
+            } else if (value < 0.1) {
               return '$' + value.toFixed(8);
             } else {
               return '$' + value.toFixed(2);
