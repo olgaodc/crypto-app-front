@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ContentWrapper = styled.div`
-    /* min-height: calc(100vh - 272px); */
     margin-bottom: 50px;
 `;
 
@@ -27,7 +26,6 @@ export const Info = styled.div`
 `;
 
 export const Image = styled.img`
-    /* max-width: 420px; */
     width: 40%;
     display: block;
 
@@ -44,9 +42,7 @@ export const DescriptionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
-    /* max-width: 500px; */
     width: 55%;
-    /* align-items: center; */
 
     @media (width <= 748px) {
         width: unset;
@@ -59,7 +55,6 @@ export const Title = styled.h1`
     margin: 0;
     font-size: 66px;
     font-weight: 400;
-    /* text-align: center; */
     color: #fca311;
     font-family: 'Noto Sans NKo Unjoined', sans-serif;
     max-width: 600px;

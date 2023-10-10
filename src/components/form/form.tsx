@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AutoComplete, Empty, Form, Select, Spin } from 'antd';
+import { AutoComplete, Empty, Form, Select} from 'antd';
 import * as S from './form.styled';
 import { PrimaryButton } from '../primary-button';
 import { debounce } from "debounce";
@@ -39,7 +39,6 @@ const CryptoForm = () => {
       const cryptoList = response.data.data;
       const suggestions = cryptoList.filter((crypto: any) => crypto.name.toLowerCase().includes(value.toLowerCase()));
       setOptions(suggestions);
-      // console.log(suggestions);
 
     } catch (error) {
       console.error('Error fetching cryptocurrency suggestions', error);
@@ -61,14 +60,9 @@ const CryptoForm = () => {
       if (symbol) {
         setSelectedCryptoSymbol(symbol);
       }
-      // console.log(symbol);
 
-      // console.log('Selected Crypto ID:', id);
-
-      // const selectedDateRange = form.getFieldValue('interval');
       const selectedIntervalOption = form.getFieldValue('interval');
       const selectedInterval = intervalOptions.find(option => option.label === selectedIntervalOption)?.value;
-      // console.log(selectedIntervalOption);
       let startDate;
 
       if (selectedIntervalOption === '1 day') {
@@ -87,15 +81,8 @@ const CryptoForm = () => {
         startDate = dayjs().subtract(5, 'years');
       }
 
-      // const [startDate, endDate] = selectedDateRange;
-
-      // const startUnixTimestamp = startDate.valueOf();
-      // const endUnixTimestamp = endDate.valueOf();
       const startUnixTimestamp = dayjs(startDate).valueOf();
       const endUnixTimestamp = dayjs().valueOf();
-      // console.log(startUnixTimestamp);
-      // console.log(endUnixTimestamp);
-
 
       const response = await axios.get(`https://api.coincap.io/v2/assets/${id}/history?interval=${selectedInterval}`, {
         params: {
@@ -114,11 +101,7 @@ const CryptoForm = () => {
       });
 
       setSelectedCryptoPrice(cryptoPrices);
-      // console.log(selectedCryptoPrice);
       setSelectedCryptoTime(CryptoTimestamps);
-      // console.log("times: ", CryptoTimestamps);
-
-      // console.log('Selected Crypto Data:', selectedCryptoData);
 
     } catch (error) {
       console.error('Error fetching cryptocurrency data', error);
@@ -126,7 +109,7 @@ const CryptoForm = () => {
     } finally {
       setLoading(false);
 
-      if (selectedCryptoPrice.length == 0) {
+      if (selectedCryptoPrice.length === 0) {
         setHasNoData(true);
       };      
     }

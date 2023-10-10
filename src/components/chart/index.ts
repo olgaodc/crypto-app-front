@@ -1,3 +1,3 @@
-import CryptoChart from './chart';
+import CryptoChart from "./chart";
 
 export { CryptoChart }

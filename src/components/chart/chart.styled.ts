@@ -3,22 +3,6 @@ import styled from "styled-components";
 export const ChartWrapper = styled.div`
     display: flex;
     justify-content: center;
-    
-
-    div {
-        background-color: #1B1C2F;
-        padding: 30px;
-        border-radius: 8px;
-        width: 80%;        
-
-        @media (width <= 892px) {
-            width: 100%;
-        }
-
-        @media (width <= 576px) {
-            padding: 15px;
-        }
-    }
 
     .cryptoName {
         font-size: 32px;
@@ -40,4 +24,28 @@ export const ChartWrapper = styled.div`
         }
     }
 
+`;
+
+export const DesktopChart = styled.div`
+    background-color: #1B1C2F;
+    padding: 30px;
+    border-radius: 8px;
+    width: 80%;  
+
+    @media (width <= 892px) {
+        width: 100%;
+    }
+
+    @media (width <= 576px) {
+        display: none;
+    }
+`;
+
+export const MobileChart = styled.div`
+    display: none;
+
+    @media (width <= 576px) {
+        display: block;
+        width: 100%;
+    }
 `;
