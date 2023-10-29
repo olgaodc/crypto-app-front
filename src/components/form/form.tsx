@@ -9,12 +9,12 @@ import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
 
 const intervalOptions = [
-  { label: '1 day', value: 'm1' },
-  { label: '3 days', value: 'm5' },
-  { label: '1 week', value: 'm15' },
-  { label: '1 month', value: 'h1' },
-  { label: '6 months', value: 'h6' },
-  { label: '1 year', value: 'h12' },
+  { label: '1 day', value: 'm5' },
+  { label: '3 days', value: 'm15' },
+  { label: '1 week', value: 'm30' },
+  { label: '1 month', value: 'h2' },
+  { label: '6 months', value: 'h12' },
+  { label: '1 year', value: 'd1' },
   { label: '5 years', value: 'd1' },
 ];
 
